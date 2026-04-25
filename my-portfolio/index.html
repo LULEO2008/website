@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yilin Lu - Portfolio</title>
+    <style>
+        /* === CSS Variables & Base Styles === */
+        :root {
+            --bg-color-1: #0f172a;
+            --bg-color-2: #1e1b4b;
+            --bg-color-3: #172554;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-muted: #cbd5e1;
+            --accent: #38bdf8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-color-1), var(--bg-color-2), var(--bg-color-3));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* === Typography & Layout === */
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 0.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        ul {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === Glassmorphism Components === */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* === Navigation === */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* === Section Specifics === */
+        /* 1. Hero */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            width: 100%;
+        }
+
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid var(--accent);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .hero-name {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        /* 6. Skills */
+        .skill-group {
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--accent);
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin: 5px 5px 5px 0;
+            font-size: 0.95rem;
+        }
+
+        /* Placeholders */
+        .cert-placeholder {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            margin: 15px 0;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* 10. Contact */
+        .contact-box {
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: #0f172a;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #7dd3fc;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin: 0 10px;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Hide top nav on very small screens for simplicity, or keep a simplified version */
+            }
+            .hero-name {
+                font-size: 2.5rem;
+            }
+            section {
+                padding: 50px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#academic">Academics</a>
+            <a href="#extracurricular">Activities</a>
+            <a href="#volunteer">Volunteer</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#plans">Future Plans</a>
+            <a href="#reflection">Reflection</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section id="hero" class="container">
+        <div class="hero-content">
+            <div class="profile-photo">
+                <span>[Replace with your photo]</span>
+            </div>
+            <h1 class="hero-name">Yilin Lu</h1>
+            <p class="hero-tagline">Explorer Behind the Camera & Aspiring Engineer</p>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2>About Me</h2>
+        <div class="glass-card">
+            <p>My family calls me "an explorer behind the camera". I love capturing small details and happy moments in life using photography. I always take pictures during family trips to save our memories. Learning photo editing helps me make these pictures even better.</p>
+            <p>At school, my friends see me as a "reliable lab partner". When our group experiments fail, I stay calm and figure out the problem step by step. </p>
+            <p>Winning first prize at the school science fair is my proudest moment. I led a team to build a small wind tunnel. Our sensors broke many times during the project. I fixed them by reading manuals and learning how to solder wires. That experience showed me how important it is to never give up and to keep exploring.</p>
+        </div>
+    </section>
+
+    <section id="academic" class="container">
+        <h2>Academic Achievements</h2>
+        <div class="glass-card">
+            <h3>Advanced Coursework</h3>
+            <ul>
+                <li>AP Calculus BC</li>
+                <li>AP Physics C: Electricity and Magnetism</li>
+            </ul>
+            
+            <h3>Science Fair Projects</h3>
+            <ul>
+                <li><strong>First Prize: Wind Tunnel Project.</strong> We studied how the shape of a car changes air resistance. Our team discovered that a streamlined body with a round front lowers drag by 35%.</li>
+                <li><strong>Solid Fuels Research.</strong> I studied the thrust differences of various solid fuels.</li>
+            </ul>
+
+            <h3>Independent Learning</h3>
+            <p>I enjoy teaching myself outside of regular classes. I learned C language programming for microcontrollers and studied basic hardware development.</p>
+
+            <div class="cert-placeholder">
+                [Science Fair Award Certificate Image Placeholder]
+            </div>
+        </div>
+    </section>
+
+    <section id="extracurricular" class="container">
+        <h2>Extracurricular Activities</h2>
+        <div class="glass-card">
+            <h3>Science Fair Project Leader (11th Grade)</h3>
+            <p>I created our research plan and divided tasks like model making and data testing. Unstable data was a big problem at first. I solved it by using new materials and building stands we could adjust.</p>
+            
+            <h3>Journalist Club President (12th Grade)</h3>
+            <p>I organized photo shoots for big school events, like our anniversary and sports day. I also reviewed articles before we posted them on the school WeChat account. We faced issues with slow publishing and bad photo quality. To fix this, I made a clear workflow: shoot, select, edit, and review. I even taught members how to compose photos and use lighting. We always used my "shooting checklist" before taking pictures.</p>
+            
+            <h3>Turing Drama Club (11th Grade)</h3>
+            <p>I acted in a Chinese play. The story was about the life of the famous scientist Alan Turing.</p>
+            
+            <h3>School Volunteer (9th - 12th Grade)</h3>
+            <p>I took photos and helped visitors find their way around the campus during school events.</p>
+        </div>
+    </section>
+
+    <section id="volunteer" class="container">
+        <h2>Volunteer & Community Service</h2>
+        <div class="glass-card">
+            <h3>School Community Volunteer</h3>
+            <p>Giving back to my school community is very important to me. I worked as a school volunteer for three years. During open days and school festivals, I guided guests and took high-quality photos to document the events.</p>
+            
+            <h3>Heart Rescue Course (2023)</h3>
+            <p>I completed a special heart rescue training program. Now I know how to spot a cardiac arrest. I learned how to perform CPR and use an AED properly. This experience taught me how to save lives in an emergency.</p>
+            
+            <div class="cert-placeholder">
+                [Heart Rescue Course Certificate Image Placeholder]
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="container">
+        <h2>Skills</h2>
+        <div class="glass-card">
+            <div class="skill-group">
+                <h3>Hard Skills</h3>
+                <span class="badge">Photography (Drone, Composition, Lighting)</span>
+                <span class="badge">Photo Editing</span>
+                <span class="badge">Basic Soldering</span>
+                <span class="badge">C Programming</span>
+                <span class="badge">Microcontroller Basics</span>
+                <span class="badge">Data Analysis</span>
+            </div>
+            <div class="skill-group" style="margin-top: 30px;">
+                <h3>Soft Skills</h3>
+                <span class="badge">Problem Solving</span>
+                <span class="badge">Teamwork</span>
+                <span class="badge">Communication</span>
+                <span class="badge">Leadership</span>
+                <span class="badge">Staying Calm Under Pressure</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <h2>Personal Projects & Hobbies</h2>
+        <div class="glass-card">
+            <h3>Drone Photography & Film</h3>
+            <p>Flying drones is one of my favorite hobbies. Once, my drone crashed and broke. I learned how to fix it by reading the manual and watching online videos. Later, I joined a team to make a short film using my drone. We had different ideas about the video's style. I helped everyone talk nicely so we could agree on one plan.</p>
+            
+            <h3>Wind Tunnel Construction</h3>
+            <p>Building this wind tunnel was a fun personal and academic challenge. I made the car models myself and fixed the broken sensors. Over time, I greatly improved how accurately we collected data from the wind tunnel.</p>
+        </div>
+    </section>
+
+    <section id="plans" class="container">
+        <h2>Post-secondary Plans</h2>
+        <div class="glass-card">
+            <p>My dream is to study engineering or applied science at the University of British Columbia (UBC). To prepare for this goal, I chose advanced classes like AP Calculus BC and AP Physics C.</p>
+            <p>I want to connect textbook theories with real-world practice. This is why I teach myself programming and hardware development at home. I am excited to learn more complex systems in university.</p>
+        </div>
+    </section>
+
+    <section id="reflection" class="container">
+        <h2>High School Reflection</h2>
+        <div class="glass-card">
+            <p>Looking back, my biggest growth happened when things went wrong. A crashed drone and broken wind tunnel sensors taught me great lessons. Every problem showed me how to be patient and think logically.</p>
+            <p>I also realized that good teamwork is better than doing everything alone. Both my camera and my science experiments proved that small details create big progress. I am very proud of my improvements during high school. Now, I feel ready for exciting new challenges at university.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <h2>Contact Information</h2>
+        <div class="glass-card contact-box">
+            <p>Thank you for visiting my portfolio. I am always open to new connections and opportunities.</p>
+            <a href="mailto:guanningwu5@gmail.com" class="btn">Send Me an Email</a>
+            <p style="margin-top: 15px;">guanningwu5@gmail.com</p>
+            
+            <div class="social-links">
+                <a href="#">[LinkedIn Placeholder]</a>
+                <a href="#">[GitHub Placeholder]</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const sections = document.querySelectorAll("section");
+
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
