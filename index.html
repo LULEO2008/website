@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leo Lu | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --bg-color: #000000;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --accent-color: #06b6d4; /* Cyan */
+            --accent-glow: rgba(6, 182, 212, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-hover: rgba(255, 255, 255, 0.06);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        body {
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        section:hover h2::after {
+            width: 100%;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            font-weight: 300;
+        }
+
+        ul {
+            list-style-position: inside;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            font-weight: 300;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        /* Layout & Utilities */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            padding: 0 2rem;
+        }
+
+        .nav-content a {
+            color: var(--text-main);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .nav-content a:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .glass-card:hover {
+            background: var(--glass-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        /* Image Display Areas */
+        .photo-area {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: var(--glass-bg);
+            background-image: url('my-photo.jpg'); /* Links to your photo */
+            background-size: cover;
+            background-position: center;
+            border: 2px solid var(--accent-color);
+            margin: 0 auto 2rem;
+            box-shadow: 0 0 40px rgba(6, 182, 212, 0.15);
+        }
+
+        .cert-area {
+            width: 100%;
+            height: 300px;
+            background-color: var(--glass-bg);
+            background-image: url('cert-science.jpg'); /* Links to your certificate */
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .cert-area:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 5px 20px rgba(6, 182, 212, 0.1);
+        }
+
+        /* Section Specifics */
+        /* 1. Hero */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+            background: radial-gradient(circle at center, rgba(6, 182, 212, 0.05) 0%, transparent 60%);
+        }
+
+        .hero-name {
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-tagline {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* 6. Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            color: var(--text-main);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            background: var(--accent-color);
+            color: #000;
+        }
+
+        /* 10. Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background: var(--text-main);
+            color: var(--bg-color);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .contact-btn:hover {
+            background: var(--accent-color);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-content { display: none; }
+            .hero-name { font-size: 2.8rem; }
+            .skills-container { grid-template-columns: 1fr; }
+            .container { padding: 4rem 1.5rem; }
+            h2 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-content">
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#academic">Academics</a>
+            <a href="#extracurricular">Activities</a>
+            <a href="#volunteer">Volunteer</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#future">Plans</a>
+            <a href="#reflection">Reflection</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section id="hero" class="container reveal">
+        <div class="photo-area" aria-label="Leo Lu Profile Photo"></div>
+        <h1 class="hero-name">Leo Lu</h1>
+        <p class="hero-tagline">The Explorer Behind The Camera</p>
+    </section>
+
+    <section id="about" class="container reveal">
+        <h2>Personal Introduction</h2>
+        <div class="glass-card">
+            <p>I’m Leo Lu, a student at Shanghai Maple Leaf International School. At home, my family jokes that I’m “the one always behind the camera.” Whenever we travel or have family events, I’m usually the person taking photos, trying to capture small, real moments. Sometimes I spend too long editing a single photo, but I enjoy the process.</p>
+            <p>At school, my friends often see me as a reliable lab partner. When experiments fail, which happens more often than I’d like, I stay calm and go through the steps again to figure out what went wrong.</p>
+            <p>One experience I’m proud of is last year’s science fair. I led a small team to build a wind tunnel. We had many problems with the sensors, and it was frustrating at times. I read manuals, learned basic soldering, and kept testing until it finally worked. In the end, we won first place. That experience showed me that solving real problems is much more meaningful than just following instructions. After high school, I plan to study Engineering or Applied Science at UBC.</p>
+        </div>
+    </section>
+
+    <section id="academic" class="container reveal">
+        <h2>Academic Achievements</h2>
+        <div class="glass-card">
+            <h3>Advanced Coursework</h3>
+            <p>I am currently taking <strong>AP Calculus BC</strong> and <strong>AP Physics C: Electricity and Magnetism</strong>.</p>
+            
+            <h3 style="margin-top: 2rem;">Research Projects & Awards</h3>
+            <ul>
+                <li><strong>Science Fair First Place:</strong> Our wind tunnel project won first place. We tested different car shapes and found that a smoother, rounded front could reduce air resistance by about 35%.</li>
+                <li><strong>Solid Fuels Research:</strong> I also completed a smaller project comparing thrust from different solid fuels, which helped me understand experimental design better.</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">Independent Learning</h3>
+            <p>Outside class, I have learned basic C programming for microcontrollers and explored hardware projects on my own.</p>
+
+            <div class="cert-area" aria-label="Science Fair Certificate"></div>
+        </div>
+    </section>
+
+    <section id="extracurricular" class="container reveal">
+        <h2>Extracurricular Activities</h2>
+        <div class="glass-card">
+            <h3>Science Fair Project Leader (Grade 11)</h3>
+            <p>I was the team leader for our wind tunnel project. I planned the research and assigned tasks such as building models and collecting data. When our results were inconsistent, I suggested using ABS plastic and adjustable stands, which improved stability and gave us better data.</p>
+
+            <h3 style="margin-top: 2rem;">Journalism Club President (Grade 12)</h3>
+            <p>I serve as president of the journalism club. I organize photography for school events like sports day and anniversaries. To improve efficiency and quality, I introduced a simple workflow: shoot, select, edit, and review. I also trained members in basic photography skills and created checklists before events. These changes made our work more consistent.</p>
+
+            <h3 style="margin-top: 2rem;">Turing Drama Club (Grade 11)</h3>
+            <p>I also joined the Turing Drama Club in Grade 11 and performed in a Chinese play about Alan Turing. It was different from my usual interests, but it was a valuable and enjoyable experience.</p>
+        </div>
+    </section>
+
+    <section id="volunteer" class="container reveal">
+        <h2>Volunteer Work & Community Service</h2>
+        <div class="glass-card">
+            <h3>School Volunteer (Since Grade 9)</h3>
+            <p>Since Grade 9, I have volunteered at school events such as open days and festivals. I guide visitors and take photos for school records. Although the work is simple, I have continued doing it over the years.</p>
+
+            <h3 style="margin-top: 2rem;">First Aid Course (2023)</h3>
+            <p>In 2023, I completed a first aid course. I learned how to recognize cardiac arrest, perform CPR, and use an AED, along with basic first aid skills.</p>
+        </div>
+    </section>
+
+    <section id="skills" class="container reveal">
+        <h2>Skills & Abilities</h2>
+        <div class="skills-container">
+            <div class="glass-card">
+                <h3>Technical Skills</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Drone Photography & FPV</span>
+                    <span class="skill-tag">Lightroom & Photoshop</span>
+                    <span class="skill-tag">Basic Soldering</span>
+                    <span class="skill-tag">C Programming</span>
+                    <span class="skill-tag">Microcontrollers</span>
+                    <span class="skill-tag">Data Analysis</span>
+                </div>
+            </div>
+            <div class="glass-card">
+                <h3>Soft Skills</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Team Collaboration</span>
+                    <span class="skill-tag">Clear Communication</span>
+                    <span class="skill-tag">Staying Calm Under Pressure</span>
+                    <span class="skill-tag">Problem Solving</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container reveal">
+        <h2>Personal Projects & Hobbies</h2>
+        <div class="glass-card">
+            <h3>Drone Repair</h3>
+            <p>I enjoy working with drones. After crashing one, I chose to repair it myself instead of replacing it. I studied manuals and watched tutorials until I was able to fix it.</p>
+
+            <h3 style="margin-top: 2rem;">Short Film Production</h3>
+            <p>I also worked on a short film with a team. We had different opinions on the visual style, but I helped guide the discussion so we could reach a decision and complete the project.</p>
+
+            <h3 style="margin-top: 2rem;">DIY Wind Tunnel</h3>
+            <p>The wind tunnel project began as a school assignment but became a personal interest. I continued improving the design and testing methods, learning a lot through trial and error.</p>
+        </div>
+    </section>
+
+    <section id="future" class="container reveal">
+        <h2>Post-Secondary Plans</h2>
+        <div class="glass-card">
+            <p>I plan to study <span class="highlight">Engineering or Applied Science at UBC</span>. I am interested in areas such as mechatronics or energy systems, although I am still exploring. I chose AP Calculus and AP Physics to prepare, and I continue to build projects and learn programming in my own time.</p>
+        </div>
+    </section>
+
+    <section id="reflection" class="container reveal">
+        <h2>High School Reflection</h2>
+        <div class="glass-card">
+            <p>Looking back, I have learned the most from challenges. A crashed drone, failed sensors, and team disagreements were all difficult at the time, but they helped me grow. I learned patience, logical thinking, and how to listen to others.</p>
+            <p>I also realized that good teamwork matters. The best results came when we discussed problems together instead of working separately. Both photography and experiments taught me to pay attention to details. I have changed a lot since Grade 9, and I am ready for new challenges in university.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="container reveal">
+        <h2>Contact Information</h2>
+        <div class="glass-card">
+            <div class="contact-grid">
+                <div class="contact-item glass-card" style="margin-bottom: 0;">
+                    <h3>Email</h3>
+                    <p>guanningwu5@gmail.com</p>
+                    <a href="mailto:guanningwu5@gmail.com" class="contact-btn">Send Email</a>
+                </div>
+                <div class="contact-item glass-card" style="margin-bottom: 0;">
+                    <h3>Phone</h3>
+                    <p>+86 138 8888 1234</p>
+                    <a href="tel:+8613888881234" class="contact-btn">Call Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
